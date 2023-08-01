@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> CALCULATOR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+    <script src="math.js" type="text/javascript"></script>
+
+    <style>
+      .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px; 
+        border-style: none; 
+        width:max-content;
+        height: max-content;
+        margin: auto;
+      }
+      .pad-container{
+        display: flex;
+        flex-direction: column;
+        width: max-content;
+        height: max-content;
+      }
+      .pad-inner{
+        display: flex;
+        flex-direction: row;
+      }
+
+      button{
+        display:inline-block;
+        height:80px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        background-color: beige;
+        border-style: none;
+        border-radius: 40px;
+        transition: opacity .15s;
+        font-family: Noto Sans, arial;
+        font-size: medium;
+        font-weight: bold;
+        width: 80px;
+      }
+
+      .special-button{
+        background-color: rgb(226, 140, 35);
+        color:beige;
+      }
+
+      button:hover{
+        cursor:pointer;
+        opacity: .8;
+      }
+
+      button:active{
+        opacity: .6;
+      }
+
+      .screen{
+        background-color: beige;
+        border-radius: 5px;  
+        border-style: none; 
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 400px;
+      }
+
+      .inp{
+        font-size:xx-large;
+        font-family: Noto Sans, arial;
+        font-weight: bolder;
+        text-align: right;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(24, 19, 19); height: 100vh;">
+   <div class="container">
+    <div class = "screen"> <p id = "text" class="inp">0</p> </div>
+    <div class = "pad-container">
+      <div class="pad-inner">
+        <button class =" special-button" onclick="flush()" style="width:260px">
+          AC
+        </button>
+        <button onclick="pressButton('/')" class =" special-button">
+          /
+        </button>
+      </div>
+      <div class="pad-inner">
+        <button onclick="pressButton('7')">
+          7          
+        </button>
+        <button onclick="pressButton('8')">
+          8
+        </button>
+        <button onclick="pressButton('9')">
+          9
+        </button>
+        <button class = "special-button" onclick="pressButton('*')">
+          *
+        </button>
+      </div>
+      <div class="pad-inner">
+        <button onclick = "pressButton('4')">
+          4
+        </button>
+        <button onclick="pressButton('5')">
+          5
+        </button>
+        <button onclick="pressButton('6')">
+          6
+        </button>
+        <button class =" special-button" onclick="pressButton('+')">
+          +
+        </button>
+      </div>
+      <div class="pad-inner">
+        <button onclick="pressButton('1')">
+          1
+        </button>
+        <button onclick="pressButton('2')">
+          2
+        </button>
+        <button onclick="pressButton('3')">
+          3
+        </button>
+        <button class =" special-button" onclick="pressButton('-')">
+          -
+        </button>
+      </div>
+      <div class="pad-inner">
+        <button onclick="pressButton('0')" style="width:170px">
+          0
+        </button>
+        <button class =" special-button" onclick="del()">
+          del
+        </button>
+        <button class ="special-button" onclick="calculate()">
+          =
+        </button>
+      </div>
+    </div>
+   </div>
+   <script>
+    var string = ""
+    var addOp = "false"
+
+    function pressButton(x) {
+
+      if(x == '/' | x == '*' | x == '+' | x == '-'){
+        if(addOp == "true"){
+          addOp = "false"
+          string += x
+          document.getElementById("text").innerHTML = string
+        }
+      }
+      else{
+        string += x
+        addOp = "true"
+        document.getElementById("text").innerHTML = string
+      }   
+    }
+      
+    function flush() {
+        string = ""
+        addOp = false
+        document.getElementById("text").innerHTML = 0
+    }
+
+    function calculate() {
+        document.getElementById("text").innerHTML = eval(string)
+        string = ""
+        addOp = false
+    }
+
+    function del(){
+        string = string.slice(0,-1)
+
+        if(string.length == 0)
+          document.getElementById("text").innerHTML = 0
+        else
+          document.getElementById("text").innerHTML = string
+    }
+   </script>
+  </body>
+</html>
+
+
+
+
+
